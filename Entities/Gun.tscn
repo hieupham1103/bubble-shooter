@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3 uid="uid://cliwfommnvek2"]
+
+[ext_resource type="Script" path="res://Entities/Gun.gd" id="1_ui5ts"]
+[ext_resource type="Texture2D" uid="uid://c4ebc1hhvswoy" path="res://Assets/gun.png" id="2_dleoe"]
+
+[node name="Gun" type="Node2D"]
+script = ExtResource("1_ui5ts")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_dleoe")
+offset = Vector2(8, 0)
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Label" type="Label" parent="."]
+offset_left = -20.0
+offset_top = -9.0
+offset_right = 20.0
+offset_bottom = 7.0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="predict_timer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="predict_timer" to="." method="_on_predict_timer_timeout"]

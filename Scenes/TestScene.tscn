@@ -1,0 +1,48 @@
+[gd_scene load_steps=7 format=3 uid="uid://c7kx2e0m1as48"]
+
+[ext_resource type="Texture2D" uid="uid://btudno7kjgvso" path="res://Assets/frame.png" id="1_ph8hl"]
+[ext_resource type="Script" path="res://Scenes/PlayScene.gd" id="1_yp0jv"]
+[ext_resource type="PackedScene" uid="uid://cliwfommnvek2" path="res://Entities/Gun.tscn" id="2_bsydd"]
+[ext_resource type="Script" path="res://Scenes/Camera2D.gd" id="2_f3afn"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6y4pm"]
+size = Vector2(9, 510)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j7w4d"]
+size = Vector2(320, 10)
+
+[node name="TestScene" type="Node2D"]
+script = ExtResource("1_yp0jv")
+number_balls = 8
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(160, 255)
+zoom = Vector2(2, 2)
+script = ExtResource("2_f3afn")
+
+[node name="Frame" type="Sprite2D" parent="."]
+position = Vector2(160, 255)
+texture = ExtResource("1_ph8hl")
+
+[node name="left" type="StaticBody2D" parent="Frame"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Frame/left"]
+position = Vector2(-155.5, 0)
+shape = SubResource("RectangleShape2D_6y4pm")
+
+[node name="right" type="StaticBody2D" parent="Frame"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Frame/right"]
+position = Vector2(155.5, 0)
+shape = SubResource("RectangleShape2D_6y4pm")
+
+[node name="top" type="StaticBody2D" parent="Frame"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Frame/top"]
+position = Vector2(0, -251)
+shape = SubResource("RectangleShape2D_j7w4d")
+
+[node name="Balls" type="Node2D" parent="."]
+
+[node name="Gun" parent="." instance=ExtResource("2_bsydd")]
+position = Vector2(160, 476)

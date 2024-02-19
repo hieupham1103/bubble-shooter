@@ -1,0 +1,14 @@
+{
+	"attract":{
+		"prefix": [],
+		"suffix": ["tion", "tive"]
+	},
+	"act":{
+		"prefix": [],
+		"suffix": ["tion", "tive"]
+	},
+	"devlop":{
+		"prefix": [],
+		"suffix": ["ment"]
+	}
+}

@@ -1,0 +1,48 @@
+[gd_scene load_steps=6 format=3 uid="uid://cwpqn6brwnyix"]
+
+[ext_resource type="Script" path="res://Entities/Ball.gd" id="1_66rtn"]
+[ext_resource type="Texture2D" uid="uid://cq31qujwau1qn" path="res://Assets/ball.png" id="2_q6yng"]
+[ext_resource type="Script" path="res://Entities/detect_near.gd" id="3_msjuu"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ngoa6"]
+radius = 27.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ghfhs"]
+radius = 32.0624
+
+[node name="GhostBall" type="RigidBody2D"]
+collision_layer = 4
+mass = 0.01
+gravity_scale = 0.0
+script = ExtResource("1_66rtn")
+type = 3
+mask_suffix = ["tion"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.192157)
+scale = Vector2(0.565362, 0.565362)
+texture = ExtResource("2_q6yng")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ngoa6")
+one_way_collision = true
+
+[node name="detect_near" type="Area2D" parent="."]
+collision_layer = 4
+script = ExtResource("3_msjuu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="detect_near"]
+shape = SubResource("CircleShape2D_ghfhs")
+
+[node name="Label" type="Label" parent="."]
+z_index = 1
+offset_left = -45.0
+offset_top = -17.0
+offset_right = 45.0
+offset_bottom = 14.0
+text = "..."
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[connection signal="area_entered" from="detect_near" to="." method="_on_detect_near_area_entered"]
