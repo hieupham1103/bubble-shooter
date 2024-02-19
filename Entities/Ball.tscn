@@ -30,6 +30,7 @@ script = ExtResource("3_odkt8")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="detect_near"]
 shape = SubResource("CircleShape2D_ghfhs")
+disabled = true
 
 [node name="Label" type="Label" parent="."]
 z_index = 1

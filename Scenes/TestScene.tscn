@@ -13,11 +13,9 @@ size = Vector2(320, 10)
 
 [node name="TestScene" type="Node2D"]
 script = ExtResource("1_yp0jv")
-number_balls = 8
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(160, 255)
-zoom = Vector2(2, 2)
 script = ExtResource("2_f3afn")
 
 [node name="Frame" type="Sprite2D" parent="."]
@@ -46,3 +44,19 @@ shape = SubResource("RectangleShape2D_j7w4d")
 
 [node name="Gun" parent="." instance=ExtResource("2_bsydd")]
 position = Vector2(160, 476)
+
+[node name="reset" type="Button" parent="."]
+offset_left = 238.0
+offset_top = 473.0
+offset_right = 307.0
+offset_bottom = 497.0
+text = "reset"
+
+[node name="number_balls" type="TextEdit" parent="."]
+offset_left = 238.0
+offset_top = 446.0
+offset_right = 306.0
+offset_bottom = 471.0
+text = "8"
+
+[connection signal="pressed" from="reset" to="." method="_on_reset_pressed"]

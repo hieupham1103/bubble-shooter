@@ -1,10 +1,22 @@
-[gd_scene load_steps=3 format=3 uid="uid://cliwfommnvek2"]
+[gd_scene load_steps=4 format=3 uid="uid://cliwfommnvek2"]
 
 [ext_resource type="Script" path="res://Entities/Gun.gd" id="1_ui5ts"]
 [ext_resource type="Texture2D" uid="uid://c4ebc1hhvswoy" path="res://Assets/gun.png" id="2_dleoe"]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_730lt"]
+radius = 27.0
+
 [node name="Gun" type="Node2D"]
 script = ExtResource("1_ui5ts")
+
+[node name="Line2D" type="Line2D" parent="."]
+z_index = -1
+
+[node name="CollisionTest" type="RigidBody2D" parent="Line2D"]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Line2D/CollisionTest"]
+shape = SubResource("CircleShape2D_730lt")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_dleoe")
@@ -22,6 +34,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="predict_timer" type="Timer" parent="."]
+wait_time = 0.9
 autostart = true
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

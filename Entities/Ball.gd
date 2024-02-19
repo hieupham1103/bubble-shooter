@@ -8,15 +8,14 @@ enum ball_state{
 enum type_word{
 	PREFIX,
 	SUFFIX,
-	NONE,
-	GHOST
+	NONE
 }
 
 
 @export var state: ball_state = ball_state.BOUNCH
 @export var speed = 300
 @export var velocity = Vector2(1,-1)
-@export var label_text = "..."
+@export var label_text = ""
 @export var type: type_word = type_word.NONE
 @export var mask_prefix: Array
 @export var mask_suffix: Array
@@ -24,17 +23,22 @@ enum type_word{
 func _ready():
 	$Label.text = label_text
 	$detect_near.label_text = label_text
-	
+
+var bounce_count = 0
+
 func _physics_process(delta):
+	if bounce_count >= 4:
+		_destroy()
 	if velocity.y > 0:
 		state = ball_state.FREEEZE
+	if state == ball_state.FREEEZE:
+		$detect_near/CollisionShape2D.disabled = false
 	if state == ball_state.BOUNCH:
 		var collision_info = move_and_collide(speed * velocity * delta)
 		if collision_info:
 			velocity = velocity.bounce(collision_info.get_normal())
+			bounce_count += 1
 	if type != type_word.NONE and state == ball_state.FREEEZE:
-		_destroy()
-	if type == type_word.GHOST and state == ball_state.FREEEZE:
 		_destroy()
 		
 

@@ -7,6 +7,7 @@ var is_shooting = false
 
 var rng = RandomNumberGenerator.new()
 func _process(delta):
+	update_trajectory(delta)
 	pointing_look()
 
 var Balls = [preload("res://Entities/Suffixes/tion.tscn"),
@@ -17,6 +18,7 @@ var Ball = Balls[rng.randi_range(0,Balls.size() - 1)].instantiate()
 
 func _ready():
 	$Label.text = Ball.label_text
+
 
 func _input(event):
 	if shootable and event.is_action_pressed("shoot"):
@@ -34,17 +36,28 @@ func pointing_look():
 	pointing = pointing.normalized()
 	$Sprite2D.look_at(mouse_position)
 
-var empty_ball = preload("res://Entities/GhostBall.tscn")
 
-func _predict():
-	if is_shooting:
-		return
-	shootable = false
-	var newBall = empty_ball.instantiate()
-	newBall.velocity = pointing
-	newBall.position = position
-	get_tree().get_current_scene().find_child("Balls").add_child(newBall)
-	shootable = true
+var max_points = 1000
+
+func update_trajectory(delta):
+	$Line2D.clear_points()
+	var pos = Vector2(0,0)
+	var velocity = pointing * 100
+	
+	for i in max_points:
+		$Line2D.add_point(pos)
+		var collision_info = $Line2D/CollisionTest.move_and_collide(velocity * delta)
+		if collision_info:
+			velocity = velocity.bounce(collision_info.get_normal())
+		pos += velocity * delta
+		$Line2D/CollisionTest.position = pos
+		if velocity.y > 0:
+			#print(i, velocity)
+			break
+		if pos.y > 0:
+			#print(i, pos)
+			break
+		
 
 func _on_timer_timeout():
 	#print("adu")
@@ -54,5 +67,3 @@ func _on_timer_timeout():
 	is_shooting = false
 
 
-func _on_predict_timer_timeout():
-	_predict()
