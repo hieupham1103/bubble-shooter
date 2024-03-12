@@ -2,22 +2,43 @@ extends Node2D
 
 @export var pointing = Vector2(1,1)
 
-var shootable = true
+@export var shootable = true
 var is_shooting = false
 
-var rng = RandomNumberGenerator.new()
-func _process(delta):
-	update_trajectory(delta)
-	pointing_look()
-
-var Balls = [preload("res://Entities/Suffixes/tion.tscn"),
-			preload("res://Entities/Suffixes/tive.tscn"),
-			preload("res://Entities/Suffixes/ment.tscn")
-			]
-var Ball = Balls[rng.randi_range(0,Balls.size() - 1)].instantiate()
+var balls = []
+var Ball = null
 
 func _ready():
-	$Label.text = Ball.label_text
+	
+	var path = "res://Entities/SuffixesAndPrefixes/"
+	
+	var dir = DirAccess.open(path)
+	
+	if dir:
+		dir.list_dir_begin()
+		var file_name = dir.get_next()
+		while file_name != "":
+			if dir.current_is_dir():
+				pass
+			else:
+				print("Found file: " + file_name)
+				var file_path = path + file_name
+				balls.append(load(file_path))
+			file_name = dir.get_next()
+			
+	set_new_ball()
+	
+
+func _process(delta):
+	if shootable:
+		pointing_look()
+		update_trajectory(delta)
+
+func pointing_look():
+	var mouse_position = get_global_mouse_position()
+	pointing = mouse_position - position
+	pointing = pointing.normalized()
+	$Sprite2D.look_at(mouse_position)
 
 
 func _input(event):
@@ -29,12 +50,6 @@ func _input(event):
 		get_tree().get_current_scene().find_child("Balls").add_child(newBall)
 		shootable = false
 		$Timer.start(0.5)
-		
-func pointing_look():
-	var mouse_position = get_global_mouse_position()
-	pointing = mouse_position - position
-	pointing = pointing.normalized()
-	$Sprite2D.look_at(mouse_position)
 
 
 var max_points = 1000
@@ -57,13 +72,14 @@ func update_trajectory(delta):
 		if pos.y > 0:
 			#print(i, pos)
 			break
-		
+
+	
+func set_new_ball():
+	Ball = balls[randi_range(0,balls.size() - 1)].instantiate()
+	$Label.text = Ball.label_text
 
 func _on_timer_timeout():
 	#print("adu")
+	set_new_ball()
 	shootable = true
-	Ball = Balls[rng.randi_range(0,Balls.size() - 1)].instantiate()
-	$Label.text = Ball.label_text
 	is_shooting = false
-
-

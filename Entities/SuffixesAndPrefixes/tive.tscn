@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://d165wobsysfdn"]
+
+[ext_resource type="PackedScene" uid="uid://draxg8tl8a4gy" path="res://Entities/PreSuf.tscn" id="1_cy2fn"]
+
+[node name="PreSuf" instance=ExtResource("1_cy2fn")]
+label_text = "tive"

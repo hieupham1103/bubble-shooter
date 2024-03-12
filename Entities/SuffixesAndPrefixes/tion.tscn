@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bg8pxqx5ahm6l"]
+
+[ext_resource type="PackedScene" uid="uid://draxg8tl8a4gy" path="res://Entities/PreSuf.tscn" id="1_yuf7k"]
+
+[node name="PreSuf" instance=ExtResource("1_yuf7k")]
+label_text = "tion"

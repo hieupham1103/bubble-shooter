@@ -17,8 +17,8 @@ config/icon="res://icon.svg"
 
 [display]
 
-window/size/viewport_width=320
-window/size/viewport_height=510
+window/size/viewport_width=640
+window/size/viewport_height=1020
 
 [gui]
 
@@ -38,6 +38,14 @@ shoot={
 2d_physics/layer_2="pre_suf"
 2d_physics/layer_3="ghost"
 
+[physics]
+
+3d/default_gravity=0.0
+3d/default_gravity_vector=Vector3(0, 0, 0)
+2d/default_gravity=0.0
+2d/default_gravity_vector=Vector2(0, 0)
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
+textures/canvas_textures/default_texture_repeat=1

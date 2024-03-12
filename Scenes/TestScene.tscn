@@ -14,49 +14,63 @@ size = Vector2(320, 10)
 [node name="TestScene" type="Node2D"]
 script = ExtResource("1_yp0jv")
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(160, 255)
-script = ExtResource("2_f3afn")
-
-[node name="Frame" type="Sprite2D" parent="."]
-position = Vector2(160, 255)
-texture = ExtResource("1_ph8hl")
-
-[node name="left" type="StaticBody2D" parent="Frame"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Frame/left"]
-position = Vector2(-155.5, 0)
-shape = SubResource("RectangleShape2D_6y4pm")
-
-[node name="right" type="StaticBody2D" parent="Frame"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Frame/right"]
-position = Vector2(155.5, 0)
-shape = SubResource("RectangleShape2D_6y4pm")
-
-[node name="top" type="StaticBody2D" parent="Frame"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Frame/top"]
-position = Vector2(0, -251)
-shape = SubResource("RectangleShape2D_j7w4d")
-
-[node name="Balls" type="Node2D" parent="."]
-
-[node name="Gun" parent="." instance=ExtResource("2_bsydd")]
-position = Vector2(160, 476)
-
 [node name="reset" type="Button" parent="."]
+visible = false
 offset_left = 238.0
 offset_top = 473.0
 offset_right = 307.0
 offset_bottom = 497.0
 text = "reset"
 
-[node name="number_balls" type="TextEdit" parent="."]
+[node name="number_balls" type="LineEdit" parent="."]
 offset_left = 238.0
 offset_top = 446.0
 offset_right = 306.0
 offset_bottom = 471.0
 text = "8"
 
+[node name="PlayButton" type="Button" parent="."]
+offset_left = 100.0
+offset_top = 215.0
+offset_right = 220.0
+offset_bottom = 299.0
+text = "PLAY"
+
+[node name="Gun" parent="." instance=ExtResource("2_bsydd")]
+position = Vector2(160, 476)
+shootable = false
+
+[node name="GameBoard" type="Node2D" parent="."]
+position = Vector2(160, 476)
+
+[node name="Camera2D" type="Camera2D" parent="GameBoard"]
+position = Vector2(0, -221)
+script = ExtResource("2_f3afn")
+
+[node name="Frame" type="Sprite2D" parent="GameBoard"]
+position = Vector2(0, -221)
+texture = ExtResource("1_ph8hl")
+
+[node name="left" type="StaticBody2D" parent="GameBoard/Frame"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GameBoard/Frame/left"]
+position = Vector2(-155.5, 0)
+shape = SubResource("RectangleShape2D_6y4pm")
+
+[node name="right" type="StaticBody2D" parent="GameBoard/Frame"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GameBoard/Frame/right"]
+position = Vector2(155.5, 0)
+shape = SubResource("RectangleShape2D_6y4pm")
+
+[node name="top" type="StaticBody2D" parent="GameBoard/Frame"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GameBoard/Frame/top"]
+position = Vector2(0, -251)
+shape = SubResource("RectangleShape2D_j7w4d")
+
+[node name="Balls" type="Node2D" parent="GameBoard"]
+position = Vector2(-160, -476)
+
 [connection signal="pressed" from="reset" to="." method="_on_reset_pressed"]
+[connection signal="pressed" from="PlayButton" to="." method="_on_play_button_pressed"]

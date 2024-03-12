@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://cw0lwf17stlx6"]
+
+[ext_resource type="Texture2D" uid="uid://bd7gcedb3gi2h" path="res://Assets/destroy_particle.png" id="1_208k5"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_bfw1y"]
+particle_flag_disable_z = true
+angle_min = 720.0
+angle_max = 720.0
+initial_velocity_min = -180.0
+initial_velocity_max = 180.0
+gravity = Vector3(0, 0, 0)
+tangential_accel_min = 100.0
+tangential_accel_max = 100.0
+damping_min = 100.0
+damping_max = 100.0
+scale_min = 0.0
+scale_max = 3.0
+
+[node name="DestroyParticles" type="GPUParticles2D"]
+emitting = false
+amount = 20
+process_material = SubResource("ParticleProcessMaterial_bfw1y")
+texture = ExtResource("1_208k5")
+lifetime = 0.3
+one_shot = true

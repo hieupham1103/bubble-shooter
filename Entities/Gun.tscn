@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://cliwfommnvek2"]
+[gd_scene load_steps=5 format=3 uid="uid://cliwfommnvek2"]
 
 [ext_resource type="Script" path="res://Entities/Gun.gd" id="1_ui5ts"]
 [ext_resource type="Texture2D" uid="uid://c4ebc1hhvswoy" path="res://Assets/gun.png" id="2_dleoe"]
+[ext_resource type="Texture2D" uid="uid://l7yth7wbwjm4" path="res://Assets/path.png" id="2_p53ev"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_730lt"]
 radius = 27.0
@@ -11,6 +12,8 @@ script = ExtResource("1_ui5ts")
 
 [node name="Line2D" type="Line2D" parent="."]
 z_index = -1
+texture = ExtResource("2_p53ev")
+texture_mode = 1
 
 [node name="CollisionTest" type="RigidBody2D" parent="Line2D"]
 collision_layer = 4
@@ -30,12 +33,10 @@ offset_left = -20.0
 offset_top = -9.0
 offset_right = 20.0
 offset_bottom = 7.0
+theme_override_colors/font_color = Color(0.713726, 0.380392, 0.447059, 1)
+text = "fghgfh"
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="predict_timer" type="Timer" parent="."]
-wait_time = 0.9
-autostart = true
+autowrap_mode = 2
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
-[connection signal="timeout" from="predict_timer" to="." method="_on_predict_timer_timeout"]

@@ -8,13 +8,11 @@
 radius = 27.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ghfhs"]
-radius = 28.0713
+radius = 29.0172
 
 [node name="Ball" type="RigidBody2D"]
 collision_mask = 5
-gravity_scale = 0.0
 script = ExtResource("1_24q23")
-label_text = "attract"
 mask_suffix = ["tion"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
